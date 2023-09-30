@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:weather/cards/forecast.dart';
+import 'package:weather/cards/info.dart';
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
@@ -82,24 +83,24 @@ class WeatherScreen extends StatelessWidget {
                     temp: '35.0',
                   ),
                   ForecastCards(
-                    time: '03:00',
+                    time: '01:20',
+                    icon: Icons.cloud,
+                    temp: '300.0',
+                  ),
+                  ForecastCards(
+                    time: '12:00',
                     icon: Icons.cloud,
                     temp: '35.0',
                   ),
                   ForecastCards(
                     time: '03:00',
                     icon: Icons.cloud,
-                    temp: '35.0',
+                    temp: '36.8',
                   ),
                   ForecastCards(
-                    time: '03:00',
+                    time: '14:00',
                     icon: Icons.cloud,
-                    temp: '35.0',
-                  ),
-                  ForecastCards(
-                    time: '03:00',
-                    icon: Icons.cloud,
-                    temp: '35.0',
+                    temp: '39.0',
                   ),
                   ForecastCards(
                     time: '03:00',
@@ -108,6 +109,35 @@ class WeatherScreen extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Additional information',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                  color: Colors.white),
+            ),
+            const SizedBox(height: 8),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                AdditionalInfo(
+                  icon: Icons.water_drop,
+                  tempState: 'Humidity',
+                  measure: '91',
+                ),
+                AdditionalInfo(
+                  icon: Icons.air,
+                  tempState: 'Wind speed',
+                  measure: '7.67',
+                ),
+                AdditionalInfo(
+                  icon: Icons.umbrella,
+                  tempState: 'Pressure',
+                  measure: '1006',
+                ),
+              ],
             )
           ],
         ),
