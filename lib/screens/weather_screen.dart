@@ -12,7 +12,12 @@ class WeatherScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: AppBar(
-        title: const Text('Weather'),
+        title: const Text(
+          'Weather prediction',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         elevation: 0,
         centerTitle: true,
         actions: [
