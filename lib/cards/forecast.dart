@@ -19,7 +19,13 @@ class ForecastCards extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(time),
+            Text(
+              time,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
             const SizedBox(height: 8),
             Icon(icon),
             const SizedBox(height: 8),
