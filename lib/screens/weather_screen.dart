@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather/cards/forecast.dart';
 import 'package:weather/cards/info.dart';
 import 'package:http/http.dart' as http;
@@ -132,41 +133,26 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       color: Colors.white),
                 ),
                 const SizedBox(height: 16),
-                const SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      ForecastCards(
-                        time: '03:00',
-                        icon: Icons.cloud,
-                        temp: '35.0',
-                      ),
-                      ForecastCards(
-                        time: '01:20',
-                        icon: Icons.cloud,
-                        temp: '300.0',
-                      ),
-                      ForecastCards(
-                        time: '12:00',
-                        icon: Icons.cloud,
-                        temp: '35.0',
-                      ),
-                      ForecastCards(
-                        time: '03:00',
-                        icon: Icons.cloud,
-                        temp: '36.8',
-                      ),
-                      ForecastCards(
-                        time: '14:00',
-                        icon: Icons.cloud,
-                        temp: '39.0',
-                      ),
-                      ForecastCards(
-                        time: '03:00',
-                        icon: Icons.cloud,
-                        temp: '35.0',
-                      ),
-                    ],
+                SizedBox(
+                  height: 130,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      final hourlyWeather = data['list'][index + 1];
+                      final sky = data['list'][index + 1]['weather'][0]['main'];
+                      final temp = data['list'][index + 1]['main']['temp'];
+
+                      final date = DateTime.parse(hourlyWeather['dt_txt']);
+
+                      return ForecastCards(
+                        time: DateFormat.Hm().format(date),
+                        icon: sky == 'Clouds' || sky == 'Rain'
+                            ? Icons.cloud
+                            : Icons.sunny,
+                        temp: temp.toString(),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: 16),
