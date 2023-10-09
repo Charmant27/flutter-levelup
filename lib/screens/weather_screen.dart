@@ -69,10 +69,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
           final data = snapshot.data!;
 
           // get the current weather
-          final currentWeather = data['list'];
+          final currentWeather = data['list'][0];
 
           // getting the current temperature
-          final temperature = currentWeather[0]['main']['temp'];
+          final temperature = currentWeather['main']['temp'];
+          final sky = currentWeather['weather'][0]['main'];
+
+          final humidity = currentWeather['main']['humidity'];
+          final windSpeed = currentWeather['wind']['speed'];
+          final pressure = currentWeather['main']['pressure'];
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
@@ -101,8 +106,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   fontSize: 32,
                                 ),
                               ),
-                              const Icon(
-                                Icons.cloud,
+                              Icon(
+                                sky == 'Clouds' || sky == 'Rain'
+                                    ? Icons.cloud
+                                    : Icons.sunny,
                                 size: 64,
                               ),
                               const Text(
@@ -171,23 +178,23 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       color: Colors.white),
                 ),
                 const SizedBox(height: 8),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     AdditionalInfo(
                       icon: Icons.water_drop,
                       tempState: 'Humidity',
-                      measure: '91',
+                      measure: humidity.toString(),
                     ),
                     AdditionalInfo(
                       icon: Icons.air,
                       tempState: 'Wind speed',
-                      measure: '7.67',
+                      measure: windSpeed.toString(),
                     ),
                     AdditionalInfo(
                       icon: Icons.umbrella,
                       tempState: 'Pressure',
-                      measure: '1006',
+                      measure: pressure.toString(),
                     ),
                   ],
                 )
